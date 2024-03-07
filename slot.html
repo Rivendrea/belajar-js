@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slot Game</title>
+<style>
+    .slot {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        text-align: center;
+        font-size: 30px;
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body>
+<div id="slotMachine">
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+</div>  
+<button onclick="spin()">Spin</button> 
+<br><br>
+<div>Balance: <span id="balance">5000</span></div>
+<button onclick="topup()">Top Up</button>
+<a href="https://trustpositif.kominfo.go.id/">
+    <button>Withdraw</button>
+  </a> 
+
+<script>    
+   var fruits = ["🍒", "🍋", "🍇", "🍊", "🍉", "🍓"];
+
+// Player's balance
+var balance = 5000;
+
+// Function to get a random fruit
+function getRandomFruit() {
+    return fruits[Math.floor(Math.random() * fruits.length)];
+}
+
+// Function to spin the slot machine
+function spin() {
+    // Check if the player has enough balance
+    if (balance < 1000) {
+        alert("Insufficient balance. Please top up.");
+        return;
+    }
+
+    // Deduct 1000 from the balance
+    balance -= 1000;
+    updateBalance();
+
+    var slots = document.querySelectorAll('.slot');
+
+    // Display random fruits for each column
+    var results = [];
+    slots.forEach(slot => {
+        var fruit = getRandomFruit();
+        slot.textContent = fruit;
+        results.push(fruit);
+    });
+
+    // Check for winning combinations
+    var prize = checkWin(results);
+    if (prize > 0) {
+        balance += prize;
+        updateBalance();
+        alert("Congratulations! You won " + prize + " coins!");
+    } else {
+        alert("Try again. Better luck next time!");
+    }
+}
+
+// Function to check for winning combinations
+function checkWin(results) {
+    var counts = {};
+    results.forEach(fruit => {
+        counts[fruit] = (counts[fruit] || 0) + 1;
+    });
+
+    var prize = 0;
+    for (var fruit in counts) {
+        if (counts[fruit] >= 3) {
+            switch (counts[fruit]) {
+                case 3:
+                    prize += 2000;
+                    break;
+                case 4:
+                    prize += 3000;
+                    break;
+                case 5:
+                    prize += 10000;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    return prize;
+}
+
+// Function to update the balance displayed on the webpage
+function updateBalance() {
+    document.getElementById('balance').textContent = balance;
+}
+
+// Function to top up the balance
+function topup() {
+    var amount = prompt("Enter the amount to top up:");
+    amount = parseInt(amount);
+    if (!isNaN(amount) && amount > 0) {
+        balance += amount;
+        updateBalance();
+        alert("Balance topped up successfully.");
+    } else {
+        alert("Invalid amount. Please enter a valid amount to top up.");
+    }
+}
+</script>
+</body>
+</html>
