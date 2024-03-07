@@ -38,6 +38,7 @@ console.log(rizki.codename, rizki.power)
 console.log(rizki["codename"], rizki["power"])
 
 rizki.power += 100
+rizki.power -= 50
 console.log(rizki,rizki.weapon.righthand)
 console.log(dapit,dapit.attack[2])
 
