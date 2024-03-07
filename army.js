@@ -7,4 +7,13 @@ const bobo = {
 
 }
 
+const bona = {
+ 
+    trait : "big",
+    color : "light-blue",
+    type  : "tank",
+    specimen : "elephant",
+
+}
+
 console.log(bobo)

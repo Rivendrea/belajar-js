@@ -1,6 +1,6 @@
 const rizki = {
     codename : "brengos",
-    power  : 78,
+    power  : 8028,
     isDead: false,
     weapon : {
         righthand : "rokok",
@@ -31,13 +31,12 @@ const gilang = {
         righthand : "pentung",
         lefthand  : "hp",
     },
-    attack : ["punch","flying kick","karate"]
+    attack : ["bicoin","flying kick","headbutt"]
 }
 
 console.log(rizki.codename, rizki.power)
 console.log(rizki["codename"], rizki["power"])
 
-rizki.power += 100
 rizki.power -= 50
 console.log(rizki,rizki.weapon.righthand)
 console.log(dapit,dapit.attack[2])
